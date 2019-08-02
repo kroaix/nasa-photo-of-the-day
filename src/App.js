@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import styled from "styled-components";
 
 import Img from "./components/image.js"
 import ImgCopyright from "./components/copyright.js"
 import ImgDate from "./components/date.js"
 import ImgDescription from "./components/description.js"
 import ImgTitle from "./components/title.js"
-
 
 function App() {
 const [image, setImage] = useState();
@@ -32,20 +32,60 @@ useEffect(() => {
     })
 }, [])
 
+  const Container = styled.div `
+    display: flex;
+    flex-direction: row;
+    max-width: 1000px;
+    margin: 0 auto;
+  `;
 
+  const Copyright = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `;
+
+  const Left = styled.div `
+    width: 500px;
+    margin-right: 20px;
+  `;
+
+  const Right = styled.div `
+    width: 450px;
+    margin-top: 50px;
+    font-size: 21px;
+    line-height: 1.5;
+  `;
+
+  const Header = styled.div `
+    text-align: center;
+    background: #CCC;
+    padding: 20px 0;
+    width: 100%;
+  `;
+
+  const Heading1 = styled.h1 `
+    margin-top: 0;
+  `;
 
   return (
-    <div className="App container">
-      <h1>Astronomy Photo Of The Day</h1>
-      <div className="card">
-        <ImgTitle title={title} />
-        <Img imgUrl={image} />
-        <div className="caption">
-          <ImgCopyright copyright={copyright} />
-          <ImgDate date={date} />
-        </div>
-        <ImgDescription description={description} />
-      </div>
+    <div>
+      <Header>
+        <Heading1>Astronomy Photo Of The Day</Heading1>
+      </Header>
+      <Container>
+        <Left>
+          <ImgTitle title={title} />
+          <Img imgUrl={image} />
+          <Copyright>
+            <ImgCopyright copyright={copyright} />
+            <ImgDate date={date} />
+          </Copyright>
+        </Left>
+        <Right>
+          <ImgDescription description={description} />
+        </Right>
+      </Container>
     </div>
   );
 }
